@@ -1,10 +1,12 @@
+/// <reference path="../types.d.ts" />
 import { defineNitroPlugin } from 'nitropack/runtime'
 import { getDomainConfig } from '../config-loader'
+import type { RuntimeMultiDomainConfig } from '../types'
 
 export default defineNitroPlugin((nitroApp) => {
   nitroApp.hooks.hook('request', (event) => {
     const config = useRuntimeConfig()
-    const multiDomainConfig = config.multiDomainConfig as any
+    const multiDomainConfig = config.multiDomainConfig as RuntimeMultiDomainConfig
 
     if (!multiDomainConfig) return
 

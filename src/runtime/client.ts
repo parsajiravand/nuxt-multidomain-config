@@ -1,22 +1,29 @@
-import { defineNuxtPlugin } from '#app'
+/// <reference path="../types.d.ts" />
 import { getDomainConfig } from '../config-loader'
+import type { RuntimeMultiDomainConfig, DomainConfig } from '../types'
+
+// Use type assertion for window access
+const getWindow = (): any => {
+  return (globalThis as any).window
+}
 
 export default defineNuxtPlugin(() => {
   // This plugin runs on client-side only
   const config = useRuntimeConfig()
-  const multiDomainConfig = config.multiDomainConfig as any
+  const multiDomainConfig = config.multiDomainConfig as RuntimeMultiDomainConfig
 
-  if (!multiDomainConfig || typeof window === 'undefined') return
+  const win = getWindow()
+  if (!multiDomainConfig || !win) return
 
   // Extract domain from window.location
   let domain: string
 
   if (multiDomainConfig.key === 'hostname') {
-    domain = window.location.hostname
+    domain = win.location.hostname
   } else {
     // For custom keys, we might need to check URL params or other sources
     // For now, fallback to hostname
-    domain = window.location.hostname
+    domain = win.location.hostname
   }
 
   // Get domain-specific config
@@ -26,22 +33,11 @@ export default defineNuxtPlugin(() => {
   })
 
   // Store in global state for client-side access
-  if (!window.$multiDomainConfig) {
-    window.$multiDomainConfig = {
+  if (!win.$multiDomainConfig) {
+    win.$multiDomainConfig = {
       domain,
       config: domainConfig,
       isLoaded: true
     }
   }
 })
-
-// Extend window type
-declare global {
-  interface Window {
-    $multiDomainConfig?: {
-      domain: string
-      config: any
-      isLoaded: boolean
-    }
-  }
-}

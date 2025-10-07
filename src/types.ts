@@ -1,3 +1,5 @@
+import type { ComputedRef } from 'vue'
+
 export interface ModuleOptions {
   /**
    * Directory containing domain configuration files
@@ -27,7 +29,7 @@ export interface ModuleOptions {
 }
 
 export interface DomainConfig {
-  [key: string]: any
+  [key: string]: unknown
 }
 
 export interface MultiDomainState {
@@ -36,9 +38,16 @@ export interface MultiDomainState {
   isLoaded: boolean
 }
 
+export interface RuntimeMultiDomainConfig {
+  dir: string
+  default: string
+  key: string
+  watch?: boolean
+}
+
 export interface UseMultiDomainConfigReturn {
-  domain: string | null
-  config: DomainConfig
-  isLoaded: boolean
+  domain: ComputedRef<string | null>
+  config: ComputedRef<DomainConfig>
+  isLoaded: ComputedRef<boolean>
   reload: () => Promise<void>
 }

@@ -10,8 +10,8 @@
       "import": "./dist/module.mjs"
     },
     "./server": {
-      "types": "./dist/server.d.ts",
-      "import": "./dist/server.mjs"
+      "types": "./dist/runtime/server.d.ts",
+      "import": "./dist/runtime/server.js"
     }
   },
   "files": [
@@ -41,7 +41,7 @@
     "eslint": "^9.9.1",
     "nuxt": "^3.13.0",
     "typescript": "^5.5.4",
-    "vitest": "^2.0.5"
+    "vitest": "^3.2.0"
   },
   "peerDependencies": {
     "nuxt": "^3.0.0"

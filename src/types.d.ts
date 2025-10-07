@@ -1,4 +1,30 @@
-import type { ModuleOptions, UseMultiDomainConfigReturn } from './types'
+import type { ComputedRef } from 'vue'
+
+// Define types locally to avoid circular imports
+interface ModuleOptions {
+  dir: string
+  default: string
+  key: 'hostname' | string
+  watch?: boolean
+}
+
+interface DomainConfig {
+  [key: string]: unknown
+}
+
+interface RuntimeMultiDomainConfig {
+  dir: string
+  default: string
+  key: string
+  watch?: boolean
+}
+
+interface UseMultiDomainConfigReturn {
+  domain: ComputedRef<string | null>
+  config: ComputedRef<DomainConfig>
+  isLoaded: ComputedRef<boolean>
+  reload: () => Promise<void>
+}
 
 declare module '@nuxt/schema' {
   interface NuxtConfig {
@@ -10,7 +36,7 @@ declare module '@nuxt/schema' {
   }
 
   interface RuntimeConfig {
-    multiDomainConfig?: ModuleOptions
+    multiDomainConfig?: RuntimeMultiDomainConfig
   }
 }
 
@@ -20,14 +46,21 @@ declare module '#app' {
   }
 }
 
+// Extend the global Window interface
 declare global {
   interface Window {
     $multiDomainConfig?: {
       domain: string
-      config: any
+      config: DomainConfig
       isLoaded: boolean
     }
   }
 }
 
-export { ModuleOptions, UseMultiDomainConfigReturn, DomainConfig, MultiDomainState } from './types'
+declare global {
+  function useRuntimeConfig(): { multiDomainConfig?: RuntimeMultiDomainConfig }
+  function useRequestEvent(): { context: { multiDomainConfig?: { domain: string; config: any } } } | undefined
+  function defineNuxtPlugin(fn: () => void): void
+  function getHeader(event: any, name: string): string | undefined
+  function getQuery(event: any): Record<string, any>
+}

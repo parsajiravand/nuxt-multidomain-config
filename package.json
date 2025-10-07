@@ -1,0 +1,64 @@
+{
+  "name": "nuxt-multidomain-config",
+  "version": "1.0.0",
+  "description": "Domain-based configuration management for Nuxt applications",
+  "main": "./dist/module.mjs",
+  "types": "./dist/types.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/types.d.ts",
+      "import": "./dist/module.mjs"
+    },
+    "./server": {
+      "types": "./dist/server.d.ts",
+      "import": "./dist/server.mjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "nuxt-module-build build",
+    "dev": "nuxt-module-build build --stub && node playground/server.mjs",
+    "dev:build": "nuxt-module-build build",
+    "dev:prepare": "nuxt-module-build build --stub",
+    "prepack": "nuxt-module-build build",
+    "release": "npm run build && npm publish",
+    "test": "vitest",
+    "test:coverage": "vitest --coverage"
+  },
+  "dependencies": {
+    "@nuxt/kit": "^3.13.0"
+  },
+  "devDependencies": {
+    "@nuxt/devtools": "latest",
+    "@nuxt/eslint-config": "^0.7.3",
+    "@nuxt/module-builder": "^0.8.4",
+    "@nuxt/schema": "^3.13.0",
+    "@nuxt/test-utils": "^3.14.1",
+    "@types/node": "^20.14.12",
+    "chokidar": "^3.6.0",
+    "eslint": "^9.9.1",
+    "nuxt": "^3.13.0",
+    "typescript": "^5.5.4",
+    "vitest": "^2.0.5"
+  },
+  "peerDependencies": {
+    "nuxt": "^3.0.0"
+  },
+  "keywords": [
+    "nuxt",
+    "nuxt3",
+    "nuxt-module",
+    "multidomain",
+    "configuration",
+    "saas",
+    "multi-tenant"
+  ],
+  "author": "Parsa Jiravand",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/parsajiravand/nuxt-multidomain-config.git"
+  }
+}

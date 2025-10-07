@@ -1,0 +1,17 @@
+{
+  "theme": "light",
+  "apiBase": "https://api.myapp.com",
+  "logo": "/logos/default.png",
+  "features": {
+    "chat": true,
+    "analytics": true,
+    "notifications": true
+  },
+  "brand": {
+    "name": "MyApp",
+    "colors": {
+      "primary": "#007acc",
+      "secondary": "#6c757d"
+    }
+  }
+}

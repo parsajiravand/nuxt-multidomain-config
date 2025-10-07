@@ -1,0 +1,18 @@
+{
+  "theme": "light",
+  "apiBase": "https://api.client2.app.com",
+  "logo": "/logos/client2.png",
+  "features": {
+    "chat": false,
+    "analytics": true,
+    "notifications": true
+  },
+  "brand": {
+    "name": "Client2 App",
+    "colors": {
+      "primary": "#28a745",
+      "secondary": "#17a2b8"
+    }
+  },
+  "locale": "en"
+}

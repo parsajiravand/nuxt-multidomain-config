@@ -1,0 +1,18 @@
+{
+  "theme": "dark",
+  "apiBase": "https://api.client1.app.com",
+  "logo": "/logos/client1.png",
+  "features": {
+    "chat": true,
+    "analytics": false,
+    "notifications": true
+  },
+  "brand": {
+    "name": "Client1 App",
+    "colors": {
+      "primary": "#dc3545",
+      "secondary": "#6c757d"
+    }
+  },
+  "locale": "fa"
+}

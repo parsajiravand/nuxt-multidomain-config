@@ -29,19 +29,21 @@ export default defineNuxtModule<ModuleOptions>({
       watch: options.watch
     }
 
-    // Add server plugin for SSR domain detection
-    addServerPlugin(resolver.resolve('./runtime/server'))
-
     // Add client plugin for CSR domain detection
     addPlugin(resolver.resolve('./runtime/client'))
-
-    // Add composables
-    addPlugin(resolver.resolve('./runtime/composables'))
 
     // Add nitro plugin for request handling
     nuxt.hook('nitro:config', (nitroConfig) => {
       nitroConfig.plugins = nitroConfig.plugins || []
       nitroConfig.plugins.push(resolver.resolve('./runtime/nitro'))
+    })
+
+    // Add composables auto-import
+    nuxt.hook('autoImports:extend', (autoImports) => {
+      autoImports.push({
+        from: '#build/nuxt-multidomain-config/runtime/composables',
+        imports: ['useMultiDomainConfig']
+      })
     })
 
     // Add types

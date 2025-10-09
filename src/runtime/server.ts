@@ -1,7 +1,2 @@
-import { defineNuxtPlugin } from '#app'
-
-export default defineNuxtPlugin(() => {
-  // This plugin runs on server-side only
-  // The domain config is already attached to the event context by the nitro plugin
-  // Here we can add any server-specific initialization if needed
-})
+// Server-side functionality is handled by the nitro plugin
+// No client-side plugin needed for server runtime

@@ -1,4 +1,4 @@
-import { reloadConfigs } from '../../../src/server'
+import { reloadConfigs } from '../../../../src/config-loader'
 
 export default defineEventHandler(async (event) => {
   try {

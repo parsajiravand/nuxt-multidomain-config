@@ -19,7 +19,7 @@
   ],
   "scripts": {
     "build": "nuxt-module-build build",
-    "dev": "nuxt-module-build build --stub && node playground/server.mjs",
+    "dev": "nuxt-module-build build --stub && cd playground && npx nuxi dev",
     "dev:build": "nuxt-module-build build",
     "dev:prepare": "nuxt-module-build build --stub",
     "prepack": "nuxt-module-build build",

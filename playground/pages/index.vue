@@ -78,6 +78,8 @@
 </template>
 
 <script setup>
+import { useMultiDomainConfig } from '../../src/runtime/composables'
+
 const { config, domain } = useMultiDomainConfig()
 
 // This would be available in a real implementation
